@@ -1,14 +1,12 @@
 package com.dhamma.pesistence.entity.data;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Getter
-@Setter
+@Data
 
 public class Comment {
     @Id
@@ -20,7 +18,7 @@ public class Comment {
     public String type; // idea , financial ,
     public String text;
     public String reject;
-    @Column(nullable = false)
-    public Boolean isReject;
+    @Column(columnDefinition = "boolean default false")
+    public Boolean isReject = false;
 
 }
