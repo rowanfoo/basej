@@ -28,6 +28,10 @@ public class Fundamental {
     @JsonProperty("number_of_shares")
     private Long shares;
 
+    @JsonProperty("year_change_in_percentage")
+    private Double yearchange;
+
+
     @JsonSetter("last_trade_date")
     public void setDateJSON(String mydate) {
         System.out.println("---Fundamental---------setMyDate : " + mydate);
