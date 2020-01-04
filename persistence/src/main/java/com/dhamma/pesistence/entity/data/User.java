@@ -10,10 +10,15 @@ import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.*;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -28,13 +33,15 @@ import java.util.stream.Collectors;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@Data
+public class User implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
     public LocalDate date;
-    public String name;
-    public String userid;
+    public String username;
+    private String password;
+    private GrantedAuthority authority;
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
@@ -96,5 +103,53 @@ public class User {
         return groupByPriceMap.get(var);
     }
 
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        List<GrantedAuthority> arr = new ArrayList<>();
+//        arr.add(authority);
+//        return arr;
+//    }
+
+    @Override
+    public Collection<GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> arr = new ArrayList<>();
+        // arr.add(a);
+        arr.add(new GrantedAuthority() {
+            @Override
+            public String getAuthority() {
+                return "can_read";
+            }
+        });
+        return arr;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
 
 }
+////////////////////////////////////////////////////////////////
+// class Authority implements GrantedAuthority {
+//    private String name;
+//    @Override
+//    public String getAuthority() {
+//        return getName();
+//    }
+//}
