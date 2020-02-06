@@ -29,6 +29,7 @@ public class Fundamental {
     private Long shares;
 
     @JsonProperty("year_change_in_percentage")
+//    @JsonDeserialize(using = JacksonStringToDouble.class)
     private Double yearchange;
 
 
