@@ -10,15 +10,10 @@ import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.*;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.IOException;
-import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -34,14 +29,13 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class User implements UserDetails, Serializable {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
     public LocalDate date;
     public String username;
     private String password;
-    private GrantedAuthority authority;
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
@@ -92,6 +86,17 @@ public class User implements UserDetails, Serializable {
         return RSI;
     }
 
+    public Map<String, List<JsonElement>> getUserConfig() {
+        Map<String, List<JsonElement>> groupByPriceMap =
+                getAlgoAsJsonArray().stream().collect(Collectors.groupingBy(a -> {
+                            return a.getAsJsonObject().get("id").getAsString();
+                        }
+
+                ));
+
+        return groupByPriceMap;
+    }
+
 
     private List<JsonElement> getArray(String var) {
         Map<String, List<JsonElement>> groupByPriceMap =
@@ -102,54 +107,4 @@ public class User implements UserDetails, Serializable {
                 ));
         return groupByPriceMap.get(var);
     }
-
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        List<GrantedAuthority> arr = new ArrayList<>();
-//        arr.add(authority);
-//        return arr;
-//    }
-
-    @Override
-    public Collection<GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> arr = new ArrayList<>();
-        // arr.add(a);
-        arr.add(new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                return "can_read";
-            }
-        });
-        return arr;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-
 }
-////////////////////////////////////////////////////////////////
-// class Authority implements GrantedAuthority {
-//    private String name;
-//    @Override
-//    public String getAuthority() {
-//        return getName();
-//    }
-//}
