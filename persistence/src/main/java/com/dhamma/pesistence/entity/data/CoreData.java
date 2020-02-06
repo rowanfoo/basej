@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
@@ -40,6 +41,11 @@ public class CoreData {
     Double changepercent;
     String previousclose;
 
+
+    public Double getChangepercent() {
+        DecimalFormat df = new DecimalFormat("#.##");
+        return Double.parseDouble(df.format(changepercent));
+    }
 
     public String getIgniteid() {
         return code + date;
