@@ -18,4 +18,8 @@ public class FundamentalService {
         return fundamentalRepo.findAll(QFundamental.fundamental.code.in(codes));
     }
 
+    public Fundamental code(String code){
+        return fundamentalRepo.findOne(QFundamental.fundamental.code.equalsIgnoreCase(code)).get();
+    }
+
 }
