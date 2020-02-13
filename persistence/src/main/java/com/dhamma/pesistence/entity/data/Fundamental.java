@@ -6,6 +6,8 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 
 @Entity
@@ -27,6 +29,8 @@ public class Fundamental {
     private Long marketcap;
     @JsonProperty("number_of_shares")
     private Long shares;
+    @Transient
+    private String martketcapAsString;
 
     @JsonProperty("year_change_in_percentage")
 //    @JsonDeserialize(using = JacksonStringToDouble.class)
@@ -50,5 +54,10 @@ public class Fundamental {
         this.code = code + ".AX";
 
     }
+
+    public String getMartketcapAsString() {
+        return NumberFormat.getIntegerInstance().format(marketcap);
+    }
+
 
 }
