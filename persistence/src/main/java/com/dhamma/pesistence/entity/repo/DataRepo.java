@@ -24,5 +24,10 @@ public interface DataRepo extends JpaRepository<CoreData, Long>, QuerydslPredica
     @Query(value = "SELECT * FROM Core_Data u where u.code=?1 order by u.date desc limit 14 offset ?2 ", nativeQuery = true)
     List<CoreData> findbyCodeOffset(String code, Integer offset);
 
+
+    @Query(value = "SELECT * FROM Core_Data u where u.code=?1 order by u.date desc  limit ?2 ", nativeQuery = true)
+    List<CoreData> findbyCodeOffsetBy(String code, Integer offset);
+
+
 }
 //select  * from core_data cd where cd.code='BHP.AX' order by date desc limit 14 offset 1
