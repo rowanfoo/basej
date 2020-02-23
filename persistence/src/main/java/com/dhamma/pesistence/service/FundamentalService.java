@@ -14,8 +14,17 @@ public class FundamentalService {
     @Autowired
     FundamentalRepo fundamentalRepo;
 
-    public Iterable<Fundamental> getAllFundamentalIn(List<String> codes) {
+//    public Iterable<Fundamental> getAllFundamentalIn(List<String> codes) {
+//        return fundamentalRepo.findAll(QFundamental.fundamental.code.in(codes));
+//    }
+
+    public Iterable<Fundamental> codes(List<String> codes) {
         return fundamentalRepo.findAll(QFundamental.fundamental.code.in(codes));
+    }
+
+
+    public Fundamental code(String code) {
+        return fundamentalRepo.findOne(QFundamental.fundamental.code.eq(code)).get();
     }
 
 }
