@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.ignite.cache.query.annotations.QuerySqlField;
 import org.ta4j.core.BaseBar;
+import org.ta4j.core.num.DoubleNum;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,6 +45,7 @@ public class CoreData {
 
     public Double getChangepercent() {
         DecimalFormat df = new DecimalFormat("#.##");
+        if (changepercent == null) return 0.00;
         return Double.parseDouble(df.format(changepercent));
     }
 
@@ -70,6 +72,6 @@ public class CoreData {
 
 
     public BaseBar toBar() {
-        return new BaseBar(date.atStartOfDay(ZoneId.of("Australia/Sydney")), this.open, this.high, this.low, this.close, this.volume.doubleValue(), null);
+        return new BaseBar(date.atStartOfDay(ZoneId.of("Australia/Sydney")), this.open, this.high, this.low, this.close, this.volume.doubleValue(), DoubleNum::valueOf);
     }
 }
