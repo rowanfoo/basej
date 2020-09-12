@@ -1,5 +1,6 @@
 package com.dhamma.pesistence.entity.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.google.common.collect.Lists;
@@ -40,18 +41,13 @@ public class User {
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
     private String algo;
-    @Transient
-    private List<JsonElement> MA;
-    @Transient
-    private List<JsonElement> RSI;
-    @Transient
-    private List<JsonElement> FALLTODAY;
 
-
+    @JsonIgnore
     public List<JsonElement> getAlgoAsJsonArray() {
         return Lists.newArrayList(new Gson().fromJson(algo, JsonArray.class).iterator());
     }
 
+    @JsonIgnore
     public ArrayNode getAlgoAsJsonArrayJackson() {
         ObjectMapper objectMapper = new ObjectMapper();
         ArrayNode pp1 = null;
@@ -64,28 +60,7 @@ public class User {
 
     }
 
-
-    public List<JsonElement> getMA() {
-        if (MA == null) {
-            MA = getArray("ma");
-        }
-        return MA;
-    }
-
-    public List<JsonElement> getRSI() {
-        if (RSI == null) {
-            RSI = getArray("rsi");
-        }
-        return RSI;
-    }
-
-    public List<JsonElement> getFALLTODAY() {
-        if (RSI == null) {
-            RSI = getArray("falltoday");
-        }
-        return RSI;
-    }
-
+    @JsonIgnore
     public Map<String, List<JsonElement>> getUserConfig() {
         Map<String, List<JsonElement>> groupByPriceMap =
                 getAlgoAsJsonArray().stream().collect(Collectors.groupingBy(a -> {
@@ -93,7 +68,6 @@ public class User {
                         }
 
                 ));
-
         return groupByPriceMap;
     }
 
