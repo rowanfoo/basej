@@ -1,7 +1,9 @@
 package com.dhamma.pesistence.entity.data;
 
+import com.dhamma.pesistence.utility.JacksonStringToDouble;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -33,7 +35,7 @@ public class Fundamental {
     private String martketcapAsString;
 
     @JsonProperty("year_change_in_percentage")
-//    @JsonDeserialize(using = JacksonStringToDouble.class)
+    @JsonDeserialize(using = JacksonStringToDouble.class)
     private Double yearchange;
 
 
@@ -56,6 +58,7 @@ public class Fundamental {
     }
 
     public String getMartketcapAsString() {
+//        return shares + "";
         return NumberFormat.getIntegerInstance().format(marketcap);
     }
 
