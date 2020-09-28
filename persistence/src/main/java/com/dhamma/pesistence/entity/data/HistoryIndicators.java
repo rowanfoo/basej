@@ -11,6 +11,7 @@ import org.hibernate.annotations.TypeDef;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
