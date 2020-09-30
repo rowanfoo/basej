@@ -6,6 +6,7 @@ public enum IndicatorType {
     VOLUME,
     PRICE_FALL,
     PRICE_UP,
+    MA,
     NONE
 
 }
