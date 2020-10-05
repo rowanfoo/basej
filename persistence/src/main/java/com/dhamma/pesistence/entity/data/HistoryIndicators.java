@@ -19,7 +19,7 @@ import java.time.LocalDate;
 
 @Table(name = "History_Indicators",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"code", "date", "type_value", "userid"})
+                @UniqueConstraint(columnNames = {"code", "date", "type_id", "userid"})
         }
 )
 @TypeDef(
@@ -40,6 +40,5 @@ public class HistoryIndicators {
     public String userid;
 
     public Double value;
-    public String type_value;
-
+    public Long type_id;
 }
