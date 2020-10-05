@@ -3,7 +3,6 @@ package com.dhamma.pesistence.utility;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class Test {
 
@@ -30,6 +29,7 @@ public class Test {
 
     public static ArrayNode getNodes2() {
         try {
+            
             return (ArrayNode) mapper.readValue("hello1 , hello2 , hello3", ArrayNode.class);
 
         } catch (Exception e) {
@@ -38,6 +38,8 @@ public class Test {
         return null;
 
     }
+
+
 
 
 

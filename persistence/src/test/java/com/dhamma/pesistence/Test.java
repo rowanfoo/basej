@@ -1,19 +1,19 @@
 package com.dhamma.pesistence;
 
+import com.dhamma.pesistence.entity.data.CoreData;
+import com.dhamma.pesistence.entity.data.QSummary;
+import com.dhamma.pesistence.entity.data.Summary;
 import com.dhamma.pesistence.entity.data.User;
 import com.dhamma.pesistence.entity.repo.DataRepo;
+import com.dhamma.pesistence.entity.repo.SummaryRepo;
 import com.dhamma.pesistence.entity.repo.UserRepo;
-import com.google.gson.JsonElement;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 public class Test {
     @Autowired
     UserRepo userRepo;
@@ -53,7 +53,7 @@ public class Test {
 //
 //    }
 
-    @org.junit.Test
+    //  @org.junit.Test
     public void testme2() {
 
         User usr = userRepo.findAll().get(1);
@@ -61,14 +61,14 @@ public class Test {
         System.out.println("----------USER---------" + usr);
         System.out.println("----------USER---------" + usr.getUserConfig());
 
-        Map<String, List<JsonElement>> userconfig = usr.getUserConfig();
-        userconfig.keySet().forEach(a -> {
-            System.out.println("----data---" + userconfig.get(a).get(0).getAsJsonObject().get("value").getAsString());
-
-//            System.out.println("----data---" + userconfig.get(a).get(0).getAsJsonObject().get("value").getAsString().replace("\"","") );
-
-
-        });
+//        Map<String, List<JsonElement>> userconfig = usr.getUserConfig();
+//        userconfig.keySet().forEach(a -> {
+//            System.out.println("----data---" + userconfig.get(a).get(0).getAsJsonObject().get("value").getAsString());
+//
+////            System.out.println("----data---" + userconfig.get(a).get(0).getAsJsonObject().get("value").getAsString().replace("\"","") );
+//
+//
+//        });
 
         //userconfig.values().forEach(a -> {
         // System.out.println("----data---" + userconfig.get(a).get(0).getAsJsonObject().get("value").getAsString().replace("\"","") );
@@ -152,4 +152,47 @@ public class Test {
 //    }
 
 
+    //  @org.junit.Test
+    public void testme3() {
+        // List<CoreData> d = dataRepo.findbyCodeOffset(); //dataRepo.findbyCodeOffset("BHP.AX", 0);
+//        List<CoreData> d = dataRepo.findbyCodeOffset("BHP.AX");
+        List<CoreData> d = dataRepo.findbyCodeOffset("BHP.AX", 0);
+        d.forEach(a -> {
+            System.out.println("------------" + a);
+        });
+
+        System.out.println("------------");
+
+        d = dataRepo.findbyCodeOffset("BHP.AX", 14);
+        d.forEach(a -> {
+            System.out.println("------------" + a);
+        });
+        System.out.println("------------");
+
+        d = dataRepo.findbyCodeOffset("BHP.AX", 28);
+        d.forEach(a -> {
+            System.out.println("------------" + a);
+        });
+        System.out.println("------------");
+
+        d = dataRepo.findbyCodeOffset("BHP.AX", 42);
+        d.forEach(a -> {
+            System.out.println("------------" + a);
+        });
+
+
+    }
+
+
+    @Autowired
+    SummaryRepo summaryRepo;
+
+
+    //    @org.junit.Test
+    public void testme4() {
+        Summary sum = summaryRepo.findOne(QSummary.summary.date.eq(LocalDate.parse("2020-02-14"))).get();
+        System.out.println("-----------" + sum);
+        Double down = sum.getDown().doubleValue();
+
+    }
 }
