@@ -6,5 +6,5 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface HistoryIndicatorsRepo extends JpaRepository<HistoryIndicators, String>, QuerydslPredicateExecutor<HistoryIndicators> {
+public interface HistoryIndicatorsRepo extends JpaRepository<HistoryIndicators, Long>, QuerydslPredicateExecutor<HistoryIndicators> {
 }
