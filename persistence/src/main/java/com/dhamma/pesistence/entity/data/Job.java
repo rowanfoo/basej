@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 
-@Table(name = "History_Indicators",
+@Table(name = "Jobs",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"message", "date"})
         }
