@@ -7,7 +7,7 @@ public enum IndicatorType {
     PRICE_FALL,
     PRICE_UP,
     MA,
-    FMA,
+    MAF,
     NONE
 
 }
