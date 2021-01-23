@@ -39,7 +39,7 @@ public class UserConfig {
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
     String algo;
-
+    String description;
 
     @JsonIgnore
     public String getAlgoValue(String type) {
