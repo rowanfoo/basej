@@ -9,6 +9,7 @@ public enum IndicatorType {
     MA,
     MAF,
     PRICE_CONSEQ,
+    PRICE_HIGH,
     NONE
 
 }
