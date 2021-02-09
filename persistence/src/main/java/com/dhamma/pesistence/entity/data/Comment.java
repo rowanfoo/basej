@@ -37,6 +37,7 @@ public class Comment {
     @Enumerated(EnumType.STRING)
     @Type(type = "pgsql_enum")
     public DurationType period;
-
+    @Lob
+    private String image;
 
 }
