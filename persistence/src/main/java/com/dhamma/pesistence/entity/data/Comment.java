@@ -10,6 +10,8 @@ import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -37,7 +39,9 @@ public class Comment {
     @Enumerated(EnumType.STRING)
     @Type(type = "pgsql_enum")
     public DurationType period;
-    @Lob
-    private String image;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "refid")
+    private List<ImageChart> imageCharts = new ArrayList<>();
 
 }
