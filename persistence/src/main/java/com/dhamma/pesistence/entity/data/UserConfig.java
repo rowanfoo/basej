@@ -39,6 +39,7 @@ public class UserConfig {
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
     String algo;
+    String text;
     String description;
 
     @JsonIgnore
