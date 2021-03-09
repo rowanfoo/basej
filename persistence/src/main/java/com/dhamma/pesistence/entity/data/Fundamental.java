@@ -9,7 +9,6 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
-import java.text.NumberFormat;
 import java.time.LocalDate;
 
 @Entity
@@ -58,9 +57,12 @@ public class Fundamental {
     }
 
     public String getMartketcapAsString() {
-//        return shares + "";
-        return NumberFormat.getIntegerInstance().format(marketcap);
-    }
+        if (marketcap > 1000000) {
+            return (marketcap / 1000000) + "M";
+        } else {
+            return (marketcap / 1000000000) + "B";
+        }
 
+    }
 
 }
