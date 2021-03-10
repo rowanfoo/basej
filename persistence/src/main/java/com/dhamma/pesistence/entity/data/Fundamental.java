@@ -57,10 +57,10 @@ public class Fundamental {
     }
 
     public String getMartketcapAsString() {
-        if (marketcap > 1000000) {
-            return (marketcap / 1000000) + "M";
-        } else {
+        if (marketcap > 1000000000) {
             return (marketcap / 1000000000) + "B";
+        } else {
+            return (marketcap / 1000000) + "M";
         }
 
     }
