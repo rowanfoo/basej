@@ -1,7 +1,6 @@
 package com.dhamma.pesistence.entity.data;
 
 public enum IndicatorType {
-
     RSI,
     VOLUME,
     PRICE_FALL,
@@ -11,8 +10,8 @@ public enum IndicatorType {
     PRICE_CONSEQ,
     PRICE_HIGH,
     CHOPMA,
+    CHOPRSI,
     NONE
-
 }
 
 
