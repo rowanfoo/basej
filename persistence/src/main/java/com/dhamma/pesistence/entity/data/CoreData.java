@@ -70,6 +70,15 @@ public class CoreData {
                 '}';
     }
 
+    public String getVolAsString() {
+        if (volume > 1000000000) {
+            return (volume / 1000000000) + "B";
+        } else {
+            return (volume / 1000000) + "M";
+        }
+
+    }
+
 
     public BaseBar toBar() {
         return new BaseBar(date.atStartOfDay(ZoneId.of("Australia/Sydney")), this.open, this.high, this.low, this.close, this.volume.doubleValue(), DoubleNum::valueOf);
