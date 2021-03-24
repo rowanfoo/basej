@@ -11,6 +11,7 @@ public enum IndicatorType {
     PRICE_HIGH,
     CHOPMA,
     CHOPRSI,
+    MFI,
     NONE
 }
 
