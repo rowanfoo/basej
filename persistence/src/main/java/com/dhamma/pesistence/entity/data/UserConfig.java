@@ -41,6 +41,7 @@ public class UserConfig {
     String algo;
     String text;
     String description;
+    String notes;
 
     @JsonIgnore
     public String getAlgoValue(String type) {
