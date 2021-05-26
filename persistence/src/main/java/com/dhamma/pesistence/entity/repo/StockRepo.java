@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface StockRepo extends JpaRepository<CoreStock, Long>, QuerydslPredicateExecutor<CoreStock> {
 
-    @Query("SELECT DISTINCT c.category FROM CoreStock c")
+    @Query("SELECT distinct  c.category FROM CoreStock c  order by c.category ")
     public List<String> category();
 
     @Query("SELECT DISTINCT c.subcategory FROM CoreStock c")
